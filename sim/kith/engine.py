@@ -261,6 +261,8 @@ def _binding(world: World, history: History) -> None:
     already fading is the only one that needs the push, so the dying story is
     the prize.
     """
+    if not world.auto_bind:
+        return
     cut = world.tuning["bind_threshold"]
     for region in world.regions.values():
         if region.sterile:

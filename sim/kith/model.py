@@ -98,6 +98,9 @@ class World:
     # wherever a maintainer and the player are standing in the same place.
     messengers: dict = field(default_factory=dict)
     voices: object = None
+    # Scenarios and the sweep bind automatically. The playable prototype turns
+    # this off, because deciding what to learn is the actual game.
+    auto_bind: bool = True
     player_location: str = ""
     contests: int = 0
     player_wins: int = 0

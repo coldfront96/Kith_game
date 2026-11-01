@@ -267,6 +267,58 @@ The same town at tick 110 under `monoculture`:
 
 Every voice is the same story. Nobody had to be told the ledger collapsed.
 
+## Playing it — Gate 1.5
+
+```bash
+python3 play.py
+```
+
+Travel, listen, tell, learn. No graphics, no combat verses, no syncretism —
+the spine only. It exists because the sim can say the ledger has dynamics and
+the charts can say a myth went 0.31 to 0.04, and neither says whether any of
+it is any good to **play**. Four questions it answers that Godot would answer
+six weeks later at twenty times the cost:
+
+- is listening satisfying, or tedious by the fourth town?
+- is the information legible enough to decide from, or do you end up wanting
+  the map overlay after all?
+- does thirty weeks of warning feel long when you are living through it?
+- does reviving a dying story feel like a rescue, or like chores?
+
+Time is the resource. Telling costs a week, learning three, travel four. You
+cannot be everywhere, which is the point.
+
+**You cannot tell a story you have not learned, and you cannot learn one the
+locals have stopped telling.** That circularity is the game: you arrive
+carrying nothing, listen until you work out what this place still believes,
+take what you can, and carry it somewhere it has been forgotten. A myth below
+`bind_threshold` tells you plainly that someone would have to spread it first —
+which is the only route to the rarest Kith.
+
+**The storybook is a travelogue, not a dashboard.** It records what you wrote
+down when you were last somewhere, dated, and says so:
+
+```
+  You carry 2 of 10: Greenmother, The Drowned Bell
+
+  Green Hollow (39 weeks ago)
+      fading        Lantern Jack
+      fading        The Bride in the Weir
+      ordinary      Hollowmaw
+      thriving      Greenmother
+  Fenmouth (now)
+      nearly_gone   Hollowmaw
+      ordinary      The Drowned Bell
+
+  (What you wrote down when you were last there. It may be out of date.)
+```
+
+Stale information is the feature. It makes revisiting worth doing, it lets the
+world surprise you, and it stops ten regions becoming a spreadsheet.
+
+Binding is a deliberate act here — `world.auto_bind` is off, because deciding
+what to learn is the game. Scenarios and the sweep leave it on.
+
 ## Known gaps
 
 - **Combat is abstracted to a single standing comparison.** The verse-level design — verses as moves, invoking cosmological frames mid-contest, calling out a Rumor's false origin — is not modelled at all. The sim only answers whether the *economy* around contests works.
