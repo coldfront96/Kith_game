@@ -195,6 +195,78 @@ refugees and thin ones got taken over, now with numbers on it.
 It is also a free design lever. How hard a place is to corrupt is set entirely
 by how many stories it knows, with no special-casing anywhere.
 
+## Hearing the ledger
+
+`listen.py` walks you through a settlement and prints what you would overhear.
+The charts tell you a myth went 0.31 to 0.04; this tells you whether a player
+would have **noticed**, which is the question the readout design actually has
+to answer and which no number answers.
+
+```bash
+python3 listen.py --scenario monoculture --ticks 0,110,220
+python3 listen.py --scenario collector --region fenmouth
+```
+
+No map overlay. An overlay would let the player optimise the world from a menu
+without going anywhere, which is the ten-region upkeep stress in a different
+costume. Belief lives in people, so you read it off people.
+
+Myths are sampled **in proportion to belief**: a story everyone tells comes up
+constantly, one at three percent you hear once, from one person, if you happen
+to be standing in the right place.
+
+### Structural floor, authored ceiling
+
+Templates are keyed by **(belief band x speaker)** — four bands, four speaker
+types, roughly five lines each — so every myth in the game has coverage forever
+and none goes silent because nobody got round to writing for it. Each myth
+slots its own nouns in (`voice` in `myths.json`), and bespoke lines layer on top
+where a myth earns them.
+
+That is the syncretism decision inverted. There the volume was low and authored
+beat procedural. Here the volume is unbounded, so generate the coverage and
+author the moments.
+
+### Children are the leading indicator
+
+Children learn what is common, so their voices dry up a band ahead of everyone
+else's. A myth no child has a rhyme for is one generation from gone — and that
+is predictive information the share number does not contain.
+
+### Bands are relative, not absolute
+
+Band cuts are multiples of an even share (1/n for a region holding n myths),
+not fixed values. The first version used absolute cuts and a myth at 0.10 read
+as "fading" in a six-myth region when it was actually above average. Same
+scaling bug as per-myth decay, in the presentation layer.
+
+### What it sounds like
+
+Green Hollow at tick 0 — a working ecology. Greenmother strong, Hollowmaw
+ordinary, the Drowned Bell going:
+
+```
+  worker:  "Everyone from here knows she takes a finger for a good year."   (Greenmother)
+  priest:  "It comes up at funerals, mostly, now."                          (Hollowmaw)
+  child:   "Never heard of it."                                             (The Drowned Bell)
+
+  No child here has a rhyme for: The Drowned Bell, The Standing Man,
+                                 Lantern Jack, The Bride in the Weir
+```
+
+The same town at tick 110 under `monoculture`:
+
+```
+  The hedges have gone over the walls, and nobody can keep up with them.
+
+  priest:  "The telling is this month. The whole village comes."            (Greenmother)
+  worker:  "Left something out for Greenmother before we started."          (Greenmother)
+  priest:  "It is not superstition. It is an account of what happened."     (Greenmother)
+  child:   "Don't say it three times near the orchard rows."                (Greenmother)
+```
+
+Every voice is the same story. Nobody had to be told the ledger collapsed.
+
 ## Known gaps
 
 - **Combat is abstracted to a single standing comparison.** The verse-level design — verses as moves, invoking cosmological frames mid-contest, calling out a Rumor's false origin — is not modelled at all. The sim only answers whether the *economy* around contests works.

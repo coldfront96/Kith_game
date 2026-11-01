@@ -1,0 +1,141 @@
+{
+  "schema_version": 2,
+  "comment": "What a settlement sounds like. Templates keyed by (belief band x speaker), with each myth slotting its own nouns in. 16 buckets, ~5 lines each: structural coverage so no myth is ever silent, with bespoke lines authored per myth on top. Children are the leading indicator - they learn what is common, so their voices dry up a band ahead of everyone else, and a myth no child mentions is one generation from gone.",
+  "bands": {
+    "thriving": 2.0,
+    "ordinary": 0.8,
+    "fading": 0.3,
+    "nearly_gone": 0.0
+  },
+  "child_silence_band": "nearly_gone",
+  "rhyme_band": "ordinary",
+  "lines": {
+    "thriving": {
+      "child": [
+        "We were playing {subject} down by {place} all afternoon.",
+        "Don't say it three times near {place}. Everyone knows that.",
+        "My brother can do the whole rhyme. All of it.",
+        "I saw {sign} once. I did.",
+        "That's not how it goes, you've got the verse wrong."
+      ],
+      "worker": [
+        "Wouldn't go near {place} after dark. Not this month.",
+        "Left something out for {subject} before we started. You should too.",
+        "Saw {sign} on the way in. Made me walk the long way round.",
+        "My mother did it the same way, and hers before that.",
+        "Everyone from here knows {verb}."
+      ],
+      "elder": [
+        "I've told it the same way sixty years and I'll not change it now.",
+        "There's nine verses. Most only know the first three.",
+        "{sign}. That's the old sign, and people still know it.",
+        "My grandmother heard it from someone who saw it.",
+        "You want the full telling, come back when I've had my supper."
+      ],
+      "priest": [
+        "We keep the marker at {place}. It's maintained.",
+        "The telling is this month. The whole village comes.",
+        "It is not superstition. It is an account of what happened.",
+        "I have the verses written. All nine of them.",
+        "We observe it properly here, whatever they do downriver."
+      ]
+    },
+    "ordinary": {
+      "child": [
+        "I think there's a song about {subject}? My gran sings it.",
+        "Is {sign} real? Davey says it's real.",
+        "We don't play that one much any more.",
+        "Something about {place}. I forget.",
+        "My mum says not to talk about it at the table."
+      ],
+      "worker": [
+        "Oh aye, {subject}. Haven't thought about that in a while.",
+        "There's a thing about {place}, isn't there.",
+        "My father used to say {verb}. Never knew if he meant it.",
+        "I'd know the tune if you hummed it.",
+        "People still leave things out. Some people."
+      ],
+      "elder": [
+        "They don't tell it right any more. But they tell it.",
+        "I know six verses. There were nine.",
+        "Ask anyone over fifty. The young ones, less so.",
+        "{sign}. You'd not hear that mentioned now.",
+        "It'll last my lifetime. After that, who knows."
+      ],
+      "priest": [
+        "The marker's still at {place}. Wants work.",
+        "We observe it. Attendance is what it is.",
+        "I have most of the verses. Not all of them.",
+        "It comes up at funerals, mostly, now.",
+        "People remember it when they need it."
+      ]
+    },
+    "fading": {
+      "child": [
+        "Who?",
+        "Is that the one about {place}?",
+        "My gran said something but I wasn't listening.",
+        "We don't have a song for that one.",
+        "Never heard of it."
+      ],
+      "worker": [
+        "{subject}. That's an old one. Not sure anyone still tells it.",
+        "My grandfather would have known.",
+        "Something at {place}, years back. Couldn't tell you what.",
+        "You'd want to ask one of the old ones.",
+        "Heard the name. Nothing else."
+      ],
+      "elder": [
+        "I'm one of the last who has it whole, I think.",
+        "Nobody's asked me about that in years.",
+        "Three verses left in me. There were nine.",
+        "My sister knew it too. She's gone now.",
+        "Sit down, then. Someone ought to have it."
+      ],
+      "priest": [
+        "The marker at {place} is overgrown. I should see to it.",
+        "We've not observed it properly in some time.",
+        "I have it written somewhere. I'd have to look.",
+        "It's in the book. Nobody reads the book.",
+        "There's no one left who would come."
+      ]
+    },
+    "nearly_gone": {
+      "child": [],
+      "worker": [
+        "No. Never heard it.",
+        "Is that a real one, or did you make it up?",
+        "You're thinking of somewhere else.",
+        "Not from round here, that."
+      ],
+      "elder": [
+        "I know the second verse. Only the second. I don't know why that one stayed.",
+        "There was a name for it. It's gone out of me.",
+        "My mother had it. I let it go.",
+        "If you've got any of it, write it down. Don't do what I did.",
+        "You're the first to ask in thirty years."
+      ],
+      "priest": [
+        "There's a line in the book I can't account for. It may be this.",
+        "The marker's gone. Taken for a wall, probably.",
+        "I couldn't tell you the first verse. I'm sorry."
+      ]
+    }
+  },
+  "markers": {
+    "thriving": "The marker at {place} is swept, and something fresh has been left on it.",
+    "ordinary": "The marker at {place} is upright. Someone has been, though not lately.",
+    "fading": "The marker at {place} is under weeds. The carving is hard to make out.",
+    "nearly_gone": "There is a stone at {place}. Nothing on it you could call a carving.",
+    "gone": "Nothing marks {place} now."
+  },
+  "land": {
+    "fire": "The rock is warm where it has no business being warm.",
+    "water": "The low ground is holding water that should have drained a week ago.",
+    "hunger": "The barley is coming up thin and pale on the south side.",
+    "stone": "There is more scree on the path than there was, and it is sharp.",
+    "growth": "The hedges have gone over the walls, and nobody can keep up with them.",
+    "dusk": "It gets dark earlier here than it ought to, and stays dark."
+  },
+  "comment_bands": "Band cuts are MULTIPLES of an even share (1/n for a region holding n myths), not absolute shares. Absolute cuts do not scale: a myth at 0.10 is thriving in a region of twenty stories and nearly dead in a region of three. Same scaling bug as per-myth decay."
+}

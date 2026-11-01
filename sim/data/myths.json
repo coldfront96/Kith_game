@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "comment": "Myth definitions. 'domain' drives which terrain a region transmutes toward when this myth saturates. 'home' is the tradition that carries it. 'rootedness' (0-1) is how hard that tradition works to keep it alive: a deep-rooted myth survives without the player, a shallow one fades unless somebody deliberately retells it. Shallow myths are the interesting ones - they are the only reason to intervene.",
+  "comment": "Myth definitions. 'domain' drives which terrain a region transmutes toward when this myth saturates. 'home' is the tradition that carries it. 'rootedness' (0-1) is how hard that tradition works to keep it alive: a deep-rooted myth survives without the player, a shallow one fades unless somebody deliberately retells it. Shallow myths are the interesting ones - they are the only reason to intervene. 'voice' carries the nouns each myth slots into the shared templates in voices.json.",
   "myths": [
     {
       "id": "greenmother",
@@ -8,15 +8,27 @@
       "domain": "growth",
       "home": "greenhollow",
       "rootedness": 1.0,
-      "blurb": "She takes a finger for every good year."
+      "blurb": "She takes a finger for every good year.",
+      "voice": {
+        "subject": "Greenmother",
+        "place": "the orchard rows",
+        "sign": "a hand with a finger short",
+        "verb": "she takes a finger for a good year"
+      }
     },
     {
       "id": "hollowmaw",
       "name": "Hollowmaw",
       "domain": "hunger",
       "home": "greenhollow",
-      "rootedness": 0.90,
-      "blurb": "The thin season given a mouth."
+      "rootedness": 0.9,
+      "blurb": "The thin season given a mouth.",
+      "voice": {
+        "subject": "Hollowmaw",
+        "place": "the empty granary",
+        "sign": "a bowl left out and licked clean",
+        "verb": "it eats the thin season"
+      }
     },
     {
       "id": "lantern_jack",
@@ -24,15 +36,27 @@
       "domain": "dusk",
       "home": "greenhollow",
       "rootedness": 0.25,
-      "blurb": "He walks the old drove road and he is counting."
+      "blurb": "He walks the old drove road and he is counting.",
+      "voice": {
+        "subject": "Lantern Jack",
+        "place": "the old drove road",
+        "sign": "a light that keeps pace with you",
+        "verb": "he walks the road counting"
+      }
     },
     {
       "id": "bride_in_the_weir",
       "name": "The Bride in the Weir",
       "domain": "water",
       "home": "greenhollow",
-      "rootedness": 0.10,
-      "blurb": "Only two people still know the second verse."
+      "rootedness": 0.1,
+      "blurb": "Only two people still know the second verse.",
+      "voice": {
+        "subject": "the Bride",
+        "place": "the weir",
+        "sign": "a veil caught on the sluice",
+        "verb": "she waits under the weir"
+      }
     },
     {
       "id": "drowned_bell",
@@ -40,7 +64,13 @@
       "domain": "water",
       "home": "fenmouth",
       "rootedness": 1.0,
-      "blurb": "It rings from under the water on the night someone is owed."
+      "blurb": "It rings from under the water on the night someone is owed.",
+      "voice": {
+        "subject": "the Bell",
+        "place": "the deep channel",
+        "sign": "a bell heard under the water",
+        "verb": "it rings when someone is owed"
+      }
     },
     {
       "id": "thirteen_steps",
@@ -48,15 +78,27 @@
       "domain": "dusk",
       "home": "fenmouth",
       "rootedness": 0.85,
-      "blurb": "Counted down into the fen, never back up."
+      "blurb": "Counted down into the fen, never back up.",
+      "voice": {
+        "subject": "the Steps",
+        "place": "the fen stair",
+        "sign": "a thirteenth step that was not there",
+        "verb": "you count down and never back up"
+      }
     },
     {
       "id": "ash_mother",
       "name": "Ash Mother",
       "domain": "fire",
       "home": "fenmouth",
-      "rootedness": 0.20,
-      "blurb": "What the fen remembers of the year it burned."
+      "rootedness": 0.2,
+      "blurb": "What the fen remembers of the year it burned.",
+      "voice": {
+        "subject": "Ash Mother",
+        "place": "the burnt ground",
+        "sign": "grey on the washing",
+        "verb": "she remembers the year it burned"
+      }
     },
     {
       "id": "standing_man",
@@ -64,15 +106,27 @@
       "domain": "stone",
       "home": "stonereach",
       "rootedness": 1.0,
-      "blurb": "He was a boundary marker before he was a man."
+      "blurb": "He was a boundary marker before he was a man.",
+      "voice": {
+        "subject": "the Standing Man",
+        "place": "the boundary stone",
+        "sign": "a stone that has moved overnight",
+        "verb": "he was a marker before he was a man"
+      }
     },
     {
       "id": "emberwake",
       "name": "The Emberwake",
       "domain": "fire",
       "home": "stonereach",
-      "rootedness": 0.90,
-      "blurb": "A sleeper under the scree who turns over when wronged."
+      "rootedness": 0.9,
+      "blurb": "A sleeper under the scree who turns over when wronged.",
+      "voice": {
+        "subject": "the Emberwake",
+        "place": "the scree slope",
+        "sign": "warm rock in winter",
+        "verb": "he turns over when he is wronged"
+      }
     },
     {
       "id": "counting_crow",
@@ -80,7 +134,13 @@
       "domain": "hunger",
       "home": "stonereach",
       "rootedness": 0.12,
-      "blurb": "It lands on the roof of a house that will be empty by spring."
+      "blurb": "It lands on the roof of a house that will be empty by spring.",
+      "voice": {
+        "subject": "the Crow",
+        "place": "the roof ridges",
+        "sign": "a crow that stays too long",
+        "verb": "it counts the houses that will be empty"
+      }
     }
   ],
   "domain_terrain": {

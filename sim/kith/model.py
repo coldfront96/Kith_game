@@ -32,7 +32,7 @@ def _load(name: str) -> dict:
     return blob
 
 
-@dataclass(frozen=True)
+@dataclass
 class Myth:
     id: str
     name: str
@@ -40,6 +40,7 @@ class Myth:
     home: str
     rootedness: float = 1.0
     blurb: str = ""
+    voice: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -96,6 +97,7 @@ class World:
     # Rival Messengers and where the player last spoke. A contest fires
     # wherever a maintainer and the player are standing in the same place.
     messengers: dict = field(default_factory=dict)
+    voices: object = None
     player_location: str = ""
     contests: int = 0
     player_wins: int = 0
@@ -148,6 +150,7 @@ def load_world() -> World:
     tuning.pop("schema_version", None)
 
     from .messengers import Messenger
+    from .voices import Voices
 
     messenger_blob = _load("messengers.json")
     messengers: dict[str, Messenger] = {}
@@ -163,4 +166,5 @@ def load_world() -> World:
         domain_terrain=myth_blob["domain_terrain"],
         tuning=tuning,
         messengers=messengers,
+        voices=Voices(),
     )
