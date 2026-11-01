@@ -46,7 +46,7 @@ RANGES = {
     "bleed_feedback": (0.000, 0.030),
     "bleed_recovery": (0.005, 0.050),
     "decay_flat": (0.002, 0.010),
-    "native_telling": (0.010, 0.035),
+    "native_telling_per_myth": (0.0030, 0.0130),
     "native_fashion_damping": (0.0, 2.0),
     "telling_gain": (0.015, 0.060),
     "maintainer_vigor": (0.0, 1.0),

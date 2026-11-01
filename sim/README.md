@@ -106,13 +106,25 @@ A related bug found on the way: standing originally counted *every* myth you had
 `sweep.py` samples eleven constants and scores each draw on five requirements: stable unattended, punishes monoculture, middle ≥ 15 ticks, rivals competitive, collecting beats idling.
 
 ```
-PARAMETER SWEEP - 400 draws, 21% viable
-  stable unattended         83%
-  punishes monoculture      49%
-  middle >= 15 ticks        41%
-  rivals competitive        66%
-  collecting beats idling   53%
+PARAMETER SWEEP - 450 draws, 15% viable
+  stable unattended         84%
+  punishes monoculture      36%
+  middle >= 15 ticks        33%
+  rivals competitive        64%
+  collecting beats idling   67%
 ```
+
+Re-run after the per-myth budget fix, which moved the viable region as
+expected. The two weak constraints are now **punishing monoculture (36%)** and
+**a reactable middle (33%)** — scaling the native budget per myth gives regions
+more supply, so they resist saturation harder and bad play costs less. Those
+are the two that will break first on any future structural change.
+
+The applied values are the medians of the viable draws. That is worth checking
+rather than assuming: the centroid of a non-convex region can itself fall
+outside the region. Scored directly, this config passes all five — stable,
+punishing, middle 43 ticks, rivals at a 76% player win rate, collecting ahead
+of idling by 3 myths.
 
 No single constant came back tight enough to be individually load-bearing — every viable range spans most of what was sampled. **Viability lives in the combination, not in any one number**, which is why hand-tuning kept producing a system that worked in one respect and broke in another.
 
@@ -188,7 +200,6 @@ by how many stories it knows, with no special-casing anywhere.
 - **Combat is abstracted to a single standing comparison.** The verse-level design — verses as moves, invoking cosmological frames mid-contest, calling out a Rumor's false origin — is not modelled at all. The sim only answers whether the *economy* around contests works.
 - **Two player verbs.** `tell` and travel. Suppression, syncretism, Rumors and cosmology translation are unmodelled.
 - **Tick scale is a guess.** "One tick ≈ one week" is a label, not a pacing model.
-- **The sweep has not been re-run since the per-myth budget fix.** That change touches homeostasis directly, so the viable region has almost certainly moved again.
 - **Synthetic worlds are rings with uniform topology.** Real regions will have uneven adjacency, chokepoints and dead ends, which is exactly where a Messenger circuit would break down.
 
 ## Next
