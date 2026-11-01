@@ -11,7 +11,7 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
@@ -38,6 +38,7 @@ class Myth:
     name: str
     domain: str
     home: str
+    rootedness: float = 1.0
     blurb: str = ""
 
 
@@ -86,6 +87,11 @@ class World:
     domain_terrain: dict[str, str]
     tuning: dict[str, float]
     tick: int = 0
+
+    # Myths the player has managed to bind. A myth can only be bound where its
+    # share clears bind_threshold - you cannot learn verses nobody recites. Once
+    # bound it stays bound, even if the myth later dies out of the world.
+    bound: set[str] = field(default_factory=set)
 
     def myth(self, myth_id: str) -> Myth:
         return self.myths[myth_id]

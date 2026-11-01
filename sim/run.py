@@ -27,7 +27,10 @@ OUT = Path(__file__).resolve().parent / "out"
 
 
 def summarize(name: str, world, history) -> dict:
-    onsets = {e.region: e.tick for e in history.events if e.kind == "bleed_onset"}
+    onsets: dict[str, int] = {}
+    for e in history.events:
+        if e.kind == "bleed_onset":
+            onsets.setdefault(e.region, e.tick)  # first onset only
     no_return = {e.region: e.tick for e in history.events if e.kind == "no_return"}
     carried = {(e.region, e.detail.split(" arrives")[0]) for e in history.events if e.kind == "carried"}
 
@@ -36,6 +39,8 @@ def summarize(name: str, world, history) -> dict:
     final = history.frames[-1]
     return {
         "name": name,
+        "total_myths": len(world.myths),
+        "bound": final.bound,
         "living_myths": final.living,
         "extinct": sorted(m for m in world.extinct_myths()),
         "population": sum(final.population.values()),
@@ -57,13 +62,14 @@ def print_report(rows: list[dict], start_pop: float) -> None:
     print("=" * 78)
     print("GATE 1 - does the belief ledger have dynamics worth building on?")
     print("=" * 78)
-    head = f"{'scenario':<14}{'myths':>7}{'pop':>9}{'onset':>7}{'middle':>8}{'sterile':>9}{'xborder':>9}"
+    head = f"{'scenario':<14}{'bound':>7}{'myths':>7}{'pop':>9}{'onset':>7}{'middle':>8}{'sterile':>9}{'xborder':>9}"
     print(head)
     print("-" * 78)
     for r in rows:
         print(
             f"{r['name']:<14}"
-            f"{r['living_myths']:>3}/6  "
+            f"{str(r['bound']) + '/' + str(r['total_myths']):>7}  "
+            f"{str(r['living_myths']) + '/' + str(r['total_myths']):>7}  "
             f"{r['population']:>8,.0f}"
             f"{(r['first_onset'] if r['first_onset'] is not None else '-'):>7}"
             f"{(r['middle'] if r['middle'] is not None else '-'):>8}"
@@ -74,11 +80,15 @@ def print_report(rows: list[dict], start_pop: float) -> None:
     print(f"population at t=0: {start_pop:,.0f}   |   onset/middle in ticks (~1 week each)")
     print()
     print("READ IT LIKE THIS")
+    print("  bound    myths the player got close enough to collect. This is the metric")
+    print("           the player actually cares about, and the one deliberate play is")
+    print("           supposed to beat doing nothing on - without requiring them to")
+    print("           babysit every region in the world.")
     print("  middle   ticks from the land visibly turning to past saving. This is the")
     print("           telegraphing window. Under ~15 and the mechanic is a cliff, not")
     print("           a garden - the player cannot react in time and it reads as a")
     print("           betrayal. DESIGN.md calls for a long, loud, visible middle.")
-    print("  myths    survivors out of 6. If every scenario lands on the same number,")
+    print("  myths    survivors. If every scenario lands on the same number,")
     print("           player choice is not moving the ecology and Gate 1 fails.")
     print("  xborder  times a myth rode refugees into a neighbouring region.")
     print()

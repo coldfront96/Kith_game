@@ -1,48 +1,86 @@
 {
-  "schema_version": 1,
-  "comment": "Myth definitions. 'domain' drives which terrain a region transmutes toward when this myth saturates. 'home' is where the myth originates and where its verses can first be collected.",
+  "schema_version": 2,
+  "comment": "Myth definitions. 'domain' drives which terrain a region transmutes toward when this myth saturates. 'home' is the tradition that carries it. 'rootedness' (0-1) is how hard that tradition works to keep it alive: a deep-rooted myth survives without the player, a shallow one fades unless somebody deliberately retells it. Shallow myths are the interesting ones - they are the only reason to intervene.",
   "myths": [
     {
-      "id": "emberwake",
-      "name": "The Emberwake",
-      "domain": "fire",
-      "home": "stonereach",
-      "blurb": "A sleeper under the scree who turns over when wronged."
-    },
-    {
-      "id": "drowned_bell",
-      "name": "The Drowned Bell",
-      "domain": "water",
-      "home": "fenmouth",
-      "blurb": "It rings from under the water on the night someone is owed."
+      "id": "greenmother",
+      "name": "Greenmother",
+      "domain": "growth",
+      "home": "greenhollow",
+      "rootedness": 1.0,
+      "blurb": "She takes a finger for every good year."
     },
     {
       "id": "hollowmaw",
       "name": "Hollowmaw",
       "domain": "hunger",
       "home": "greenhollow",
+      "rootedness": 0.90,
       "blurb": "The thin season given a mouth."
     },
     {
-      "id": "standing_man",
-      "name": "The Standing Man",
-      "domain": "stone",
-      "home": "stonereach",
-      "blurb": "He was a boundary marker before he was a man."
+      "id": "lantern_jack",
+      "name": "Lantern Jack",
+      "domain": "dusk",
+      "home": "greenhollow",
+      "rootedness": 0.25,
+      "blurb": "He walks the old drove road and he is counting."
     },
     {
-      "id": "greenmother",
-      "name": "Greenmother",
-      "domain": "growth",
+      "id": "bride_in_the_weir",
+      "name": "The Bride in the Weir",
+      "domain": "water",
       "home": "greenhollow",
-      "blurb": "She takes a finger for every good year."
+      "rootedness": 0.10,
+      "blurb": "Only two people still know the second verse."
+    },
+    {
+      "id": "drowned_bell",
+      "name": "The Drowned Bell",
+      "domain": "water",
+      "home": "fenmouth",
+      "rootedness": 1.0,
+      "blurb": "It rings from under the water on the night someone is owed."
     },
     {
       "id": "thirteen_steps",
       "name": "Thirteen Steps",
       "domain": "dusk",
       "home": "fenmouth",
+      "rootedness": 0.85,
       "blurb": "Counted down into the fen, never back up."
+    },
+    {
+      "id": "ash_mother",
+      "name": "Ash Mother",
+      "domain": "fire",
+      "home": "fenmouth",
+      "rootedness": 0.20,
+      "blurb": "What the fen remembers of the year it burned."
+    },
+    {
+      "id": "standing_man",
+      "name": "The Standing Man",
+      "domain": "stone",
+      "home": "stonereach",
+      "rootedness": 1.0,
+      "blurb": "He was a boundary marker before he was a man."
+    },
+    {
+      "id": "emberwake",
+      "name": "The Emberwake",
+      "domain": "fire",
+      "home": "stonereach",
+      "rootedness": 0.90,
+      "blurb": "A sleeper under the scree who turns over when wronged."
+    },
+    {
+      "id": "counting_crow",
+      "name": "The Counting Crow",
+      "domain": "hunger",
+      "home": "stonereach",
+      "rootedness": 0.12,
+      "blurb": "It lands on the roof of a house that will be empty by spring."
     }
   ],
   "domain_terrain": {

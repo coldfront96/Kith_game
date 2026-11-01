@@ -54,9 +54,39 @@ def opportunist(world: World) -> None:
     tell(world, FOCUS, myth_id)
 
 
+def collector(world: World) -> None:
+    """The player travels, and intervenes only where they want something.
+
+    Find the unbound myth closest to becoming collectable and push that one,
+    wherever it is. Once a myth is bound, stop caring about it and move on.
+    This is targeted intervention, not upkeep: the player never tries to hold
+    the whole world in balance, they just go get what they came for.
+
+    The point of this policy is to test whether deliberate play beats doing
+    nothing on the metric the player actually cares about - creatures bound -
+    without requiring them to babysit every region.
+    """
+    best = None
+    cut = world.tuning["bind_threshold"]
+
+    for region in world.regions.values():
+        if region.sterile:
+            continue
+        for myth_id, share in region.shares().items():
+            if myth_id in world.bound or share <= 0 or share >= cut:
+                continue
+            # closest to the line is cheapest to push over it
+            if best is None or share > best[2]:
+                best = (region.id, myth_id, share)
+
+    if best is not None:
+        tell(world, best[0], best[1])
+
+
 ALL = {
     "absent": absent,
     "monoculture": monoculture,
     "gardener": gardener,
     "opportunist": opportunist,
+    "collector": collector,
 }

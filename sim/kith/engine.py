@@ -40,6 +40,7 @@ class Frame:
     bleed: dict[str, float]
     population: dict[str, float]
     living: int
+    bound: int
 
 
 @dataclass
@@ -110,9 +111,15 @@ def _native_telling(world: World) -> None:
                 region.weights[myth_id] += fashion_pot * share * ((1.0 - share) ** damping) * 4.0
 
         if known_native:
-            each = tradition_pot / len(known_native)
-            for myth_id in known_native:
-                region.weights[myth_id] += each
+            # Weighted by rootedness, not split evenly. An even split forces
+            # every region to a perfectly stable duopoly of its natives, which
+            # means nothing is ever obscure and nothing ever needs rescuing.
+            # Rootedness is what makes some stories fade on their own.
+            roots = {m: world.myth(m).rootedness for m in known_native}
+            total_root = sum(roots.values())
+            if total_root > 0:
+                for myth_id, root in roots.items():
+                    region.weights[myth_id] += tradition_pot * (root / total_root)
 
 
 def _decay(world: World, history: History) -> None:
@@ -239,6 +246,29 @@ def _watch_last_tellings(world: World, history: History) -> None:
                 )
 
 
+def _binding(world: World, history: History) -> None:
+    """A myth whose share clears bind_threshold anywhere is collectable there.
+
+    This is what gives deliberate intervention a payoff that global upkeep does
+    not need to supply. The player is not maintaining the world - they go to a
+    region because they want something out of it, push a specific story up past
+    the line, and take the local Bleed risk that comes with pushing. A myth
+    already fading is the only one that needs the push, so the dying story is
+    the prize.
+    """
+    cut = world.tuning["bind_threshold"]
+    for region in world.regions.values():
+        if region.sterile:
+            continue
+        for myth_id, share in region.shares().items():
+            if share >= cut and myth_id not in world.bound:
+                world.bound.add(myth_id)
+                _record(
+                    world, history, "bound", region.id,
+                    f"{world.myth(myth_id).name} can be bound in {region.name}",
+                )
+
+
 def _snapshot(world: World) -> Frame:
     return Frame(
         tick=world.tick,
@@ -247,6 +277,7 @@ def _snapshot(world: World) -> Frame:
         bleed={r.id: r.bleed for r in world.regions.values()},
         population={r.id: r.population for r in world.regions.values()},
         living=len(world.living_myths()),
+        bound=len(world.bound),
     )
 
 
@@ -264,6 +295,7 @@ def run(world: World, policy, ticks: int | None = None) -> History:
         _decay(world, history)
         _bleed(world, history)
         _people(world, history)
+        _binding(world, history)
         _watch_last_tellings(world, history)
         history.frames.append(_snapshot(world))
 
