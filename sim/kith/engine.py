@@ -161,7 +161,7 @@ def _bleed(world: World, history: History) -> None:
             overshoot = (share - threshold) / headroom
             region.bleed = min(1.0, region.bleed + t["bleed_rate"] * overshoot)
             domain = world.myth(myth_id).domain
-            if region.bleed_domain != domain and region.bleed > 0.05:
+            if region.bleed_domain != domain and region.bleed > t["bleed_visible"]:
                 region.bleed_domain = domain
                 _record(
                     world, history, "bleed_onset", region.id,

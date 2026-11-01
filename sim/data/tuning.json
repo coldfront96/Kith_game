@@ -55,5 +55,7 @@
   "rival_repertoire_cap": 6,
   "comment_rival_repertoire_cap": "How many myths a rival Messenger can carry. They bind by the same rule as the player, otherwise their standing is static while the player's grows all game and they lose every contest regardless of tuning.",
   "native_telling_per_myth": 0.0075,
-  "comment_native_telling_per_myth": "Native telling budget PER MYTH the region knows, replacing the old flat per-region budget. decay_flat is charged per myth, so a flat budget meant regional decay scaled with myth count while supply did not: at 25 myths per region decay outran telling 6:1 and 78% of stories died. A village that knows thirty stories tells thirty stories. Calibrated so a 4-myth region matches the old flat 0.026."
+  "comment_native_telling_per_myth": "Native telling budget PER MYTH the region knows, replacing the old flat per-region budget. decay_flat is charged per myth, so a flat budget meant regional decay scaled with myth count while supply did not: at 25 myths per region decay outran telling 6:1 and 78% of stories died. A village that knows thirty stories tells thirty stories. Calibrated so a 4-myth region matches the old flat 0.026.",
+  "bleed_visible": 0.2,
+  "comment_bleed_visible": "Bleed level at which the land has visibly changed enough to tell the player something is happening. Ambient drift in an unattended world peaks around 0.11 while player-caused Bleed runs to 1.0, so a bar in between keeps the ledger alive and breathing without ever showing the player a region turning that they did not cause. Attribution stays clean."
 }
