@@ -83,14 +83,17 @@ def _native_telling(world: World) -> None:
     hostage.
     """
     t = world.tuning
-    budget_base = t["native_telling"]
     tradition_cut = t["native_tradition_share"]
 
     for region in world.regions.values():
         if region.sterile or not region.weights:
             continue
 
+        # Budget scales with how many stories the place actually knows,
+        # because decay_flat is charged per myth. A flat per-region budget
+        # meant a myth-rich region hemorrhaged its own traditions.
         alive = region.population / max(1.0, region.population0)
+        budget_base = t["native_telling_per_myth"] * len(region.weights)
         budget = budget_base * region.transmission * min(1.0, alive)
         if budget <= 0:
             continue

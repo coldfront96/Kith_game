@@ -55,5 +55,7 @@
   "contest_saturation_damping": 0.811,
   "comment_contest_saturation_damping": "Exponent on (1 - winner's standing) damping what a contest win actually earns. Without it contests run away: winning raises standing, which wins more contests, and the player went 356-1 against every rival in the valley. You cannot win more of a room for a story it already believes.",
   "rival_repertoire_cap": 6,
-  "comment_rival_repertoire_cap": "How many myths a rival Messenger can carry. They bind by the same rule as the player, otherwise their standing is static while the player's grows all game and they lose every contest regardless of tuning."
+  "comment_rival_repertoire_cap": "How many myths a rival Messenger can carry. They bind by the same rule as the player, otherwise their standing is static while the player's grows all game and they lose every contest regardless of tuning.",
+  "native_telling_per_myth": 0.0065,
+  "comment_native_telling_per_myth": "Native telling budget PER MYTH the region knows, replacing the old flat per-region budget. decay_flat is charged per myth, so a flat budget meant regional decay scaled with myth count while supply did not: at 25 myths per region decay outran telling 6:1 and 78% of stories died. A village that knows thirty stories tells thirty stories. Calibrated so a 4-myth region matches the old flat 0.026."
 }

@@ -118,12 +118,78 @@ No single constant came back tight enough to be individually load-bearing — ev
 
 Adding Messengers invalidated the previous tuning completely. That is worth remembering: this system is not separable, and any structural change means re-sweeping rather than nudging.
 
+## Scaling: does it survive a world bigger than one valley?
+
+`scale.py` builds synthetic worlds in memory so region count, myth count and
+Messenger count can all be varied. Everything above was validated on three
+regions with three maintainers, which meant almost every region had someone
+standing in it almost all the time.
+
+### A region that knew more stories forgot them faster
+
+The bug this test was built to find. `decay_flat` is charged **per myth**, so
+regional decay scales with how many stories a place knows — but `native_telling`
+was a flat **per-region** budget. At four myths they balanced (0.0244 against
+0.0260). At twenty-five, decay outran supply six to one:
+
+| myths/region | survival, old | survival, fixed |
+| --- | --- | --- |
+| 4 | 90% | 85% |
+| 10 | 50% | 62% |
+| 25 | 22% | 61% |
+
+A rich oral tradition should be more robust, not less. The system only worked
+at roughly the four myths per region I happened to author. Fixed by scaling the
+budget per myth: a village that knows thirty stories tells thirty stories.
+
+### How many Messengers a world needs
+
+```
+  regions |     0     2     4     6     8    10    12   maintainers
+        3 |  --    ok    ok    ok    ok    ok    ok
+        5 |  --    --    ok    ok    ok    ok    ok
+        8 |  --    --    --    ok    ok    ok    ok
+       12 |  --    --    --    --    --    --    ok
+```
+
+**Roughly 0.67 to 1.0 maintainers per region, trending toward 1:1 as the world
+grows** — travel time scales with the circuit, so each Messenger covers
+proportionally less of a bigger world.
+
+That is a concrete constraint for the release model: **each new region ships
+with about one new Messenger.** Not a lore decision, a stability requirement.
+
+(The first version of this grid came back all-`ok` including zero Messengers,
+because every synthetic region had identical population and transmission. A
+uniform world is trivially stable. The grid only says anything once some places
+are small and quiet enough to fail.)
+
+### Diversity is a region's immune system
+
+Bleed does not dilute away in a myth-rich region — but it takes far longer:
+
+| myths/region | ticks to onset | ticks to ruin |
+| --- | --- | --- |
+| 3 | 7 | 26 |
+| 6 | 41 | 66 |
+| 10 | 77 | 104 |
+| 25 | 161 | 196 |
+
+Near-linear. A thin region can be overwritten in weeks; a rich one takes years
+of sustained effort. Nobody designed that — it falls out of share-based belief —
+and it is the same principle as finding 4, where diverse regions absorbed
+refugees and thin ones got taken over, now with numbers on it.
+
+It is also a free design lever. How hard a place is to corrupt is set entirely
+by how many stories it knows, with no special-casing anywhere.
+
 ## Known gaps
 
 - **Combat is abstracted to a single standing comparison.** The verse-level design — verses as moves, invoking cosmological frames mid-contest, calling out a Rumor's false origin — is not modelled at all. The sim only answers whether the *economy* around contests works.
 - **Two player verbs.** `tell` and travel. Suppression, syncretism, Rumors and cosmology translation are unmodelled.
 - **Tick scale is a guess.** "One tick ≈ one week" is a label, not a pacing model.
-- **Three regions, ten myths, three rivals.** Behaviour at ten regions and hundreds of myths is untested, and zero-sum share may behave very differently when a region holds thirty stories instead of four.
+- **The sweep has not been re-run since the per-myth budget fix.** That change touches homeostasis directly, so the viable region has almost certainly moved again.
+- **Synthetic worlds are rings with uniform topology.** Real regions will have uneven adjacency, chokepoints and dead ends, which is exactly where a Messenger circuit would break down.
 
 ## Next
 
