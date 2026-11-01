@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "comment": "Region 1 is one valley with two internal traditions (lowland humors, highland houses), per the release model in DESIGN.md. 'transmission' is how readily a told story takes hold. 'neighbors' is who receives refugees when this region bleeds out.",
+  "regions": [
+    {
+      "id": "greenhollow",
+      "name": "Green Hollow",
+      "cosmology": "humors",
+      "population": 4200,
+      "transmission": 0.95,
+      "neighbors": ["fenmouth", "stonereach"]
+    },
+    {
+      "id": "fenmouth",
+      "name": "Fenmouth",
+      "cosmology": "humors",
+      "population": 1800,
+      "transmission": 0.80,
+      "neighbors": ["greenhollow"]
+    },
+    {
+      "id": "stonereach",
+      "name": "Stonereach",
+      "cosmology": "houses",
+      "population": 900,
+      "transmission": 0.60,
+      "neighbors": ["greenhollow"]
+    }
+  ],
+  "comment_initial": "Starting raw attention weight per myth per region. A myth not listed for a region is unknown there (weight 0) and can only arrive by being carried in.",
+  "initial_weights": {
+    "greenhollow": {
+      "hollowmaw": 0.22,
+      "greenmother": 0.30,
+      "drowned_bell": 0.10,
+      "standing_man": 0.08
+    },
+    "fenmouth": {
+      "drowned_bell": 0.28,
+      "thirteen_steps": 0.24,
+      "hollowmaw": 0.12
+    },
+    "stonereach": {
+      "emberwake": 0.26,
+      "standing_man": 0.30,
+      "greenmother": 0.06
+    }
+  }
+}

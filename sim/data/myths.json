@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "comment": "Myth definitions. 'domain' drives which terrain a region transmutes toward when this myth saturates. 'home' is where the myth originates and where its verses can first be collected.",
+  "myths": [
+    {
+      "id": "emberwake",
+      "name": "The Emberwake",
+      "domain": "fire",
+      "home": "stonereach",
+      "blurb": "A sleeper under the scree who turns over when wronged."
+    },
+    {
+      "id": "drowned_bell",
+      "name": "The Drowned Bell",
+      "domain": "water",
+      "home": "fenmouth",
+      "blurb": "It rings from under the water on the night someone is owed."
+    },
+    {
+      "id": "hollowmaw",
+      "name": "Hollowmaw",
+      "domain": "hunger",
+      "home": "greenhollow",
+      "blurb": "The thin season given a mouth."
+    },
+    {
+      "id": "standing_man",
+      "name": "The Standing Man",
+      "domain": "stone",
+      "home": "stonereach",
+      "blurb": "He was a boundary marker before he was a man."
+    },
+    {
+      "id": "greenmother",
+      "name": "Greenmother",
+      "domain": "growth",
+      "home": "greenhollow",
+      "blurb": "She takes a finger for every good year."
+    },
+    {
+      "id": "thirteen_steps",
+      "name": "Thirteen Steps",
+      "domain": "dusk",
+      "home": "fenmouth",
+      "blurb": "Counted down into the fen, never back up."
+    }
+  ],
+  "domain_terrain": {
+    "fire": "volcanic",
+    "water": "drowned bog",
+    "hunger": "blighted soil",
+    "stone": "barren scree",
+    "growth": "choking overgrowth",
+    "dusk": "permanent gloom"
+  }
+}
