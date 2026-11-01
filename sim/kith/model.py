@@ -93,6 +93,14 @@ class World:
     # bound it stays bound, even if the myth later dies out of the world.
     bound: set[str] = field(default_factory=set)
 
+    # Rival Messengers and where the player last spoke. A contest fires
+    # wherever a maintainer and the player are standing in the same place.
+    messengers: dict = field(default_factory=dict)
+    player_location: str = ""
+    contests: int = 0
+    player_wins: int = 0
+    player_losses: int = 0
+
     def myth(self, myth_id: str) -> Myth:
         return self.myths[myth_id]
 
@@ -139,9 +147,20 @@ def load_world() -> World:
     tuning = {k: v for k, v in tuning_blob.items() if not k.startswith("comment")}
     tuning.pop("schema_version", None)
 
+    from .messengers import Messenger
+
+    messenger_blob = _load("messengers.json")
+    messengers: dict[str, Messenger] = {}
+    for spec in messenger_blob["messengers"]:
+        bad = [b for b in spec["bound"] if b not in myths]
+        if bad or spec["home"] not in regions:
+            raise SchemaError(f"messenger {spec['id']} references unknown myths/region: {bad or spec['home']}")
+        messengers[spec["id"]] = Messenger(**spec)
+
     return World(
         myths=myths,
         regions=regions,
         domain_terrain=myth_blob["domain_terrain"],
         tuning=tuning,
+        messengers=messengers,
     )

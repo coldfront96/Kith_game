@@ -90,3 +90,36 @@ ALL = {
     "opportunist": opportunist,
     "collector": collector,
 }
+
+
+def warlord(world: World) -> None:
+    """The combat-optimal player: force your own stories into the places where
+    you are weakest, so your Kith hit hardest everywhere you go.
+
+    This policy exists to answer one question - does strength-from-belief
+    actually pressure a player into Bleed, or merely tempt them? It plays the
+    incentive straight, with no restraint, and we measure what the valley costs.
+    """
+    best = None
+    for region in world.regions.values():
+        if region.sterile or not region.weights:
+            continue
+        shares = region.shares()
+        mine = sum(shares.get(m, 0.0) for m in world.bound)
+        if best is None or mine < best[1]:
+            best = (region.id, mine)
+
+    if best is None:
+        return
+
+    region = world.regions[best[0]]
+    shares = region.shares()
+    carried = {m: shares.get(m, 0.0) for m in world.bound if shares.get(m, 0.0) > 0}
+    if carried:
+        # push whichever of your stories already has the most purchase here
+        tell(world, region.id, max(carried, key=lambda k: carried[k]))
+    else:
+        tell(world, region.id, max(shares, key=lambda k: shares[k]))
+
+
+ALL["warlord"] = warlord

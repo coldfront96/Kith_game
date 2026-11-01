@@ -19,6 +19,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from . import messengers as mess
 from .model import World
 
 
@@ -61,6 +62,7 @@ def tell(world: World, region_id: str, myth_id: str) -> None:
     region = world.regions[region_id]
     if region.sterile:
         return
+    world.player_location = region_id
     gain = world.tuning["telling_gain"] * region.transmission
     region.weights[myth_id] = region.weights.get(myth_id, 0.0) + gain
 
@@ -291,7 +293,9 @@ def run(world: World, policy, ticks: int | None = None) -> History:
     for _ in range(ticks):
         world.tick += 1
         _native_telling(world)
+        mess.step_maintainers(world, history, _record)
         policy(world)
+        mess.step_contests(world, history, _record)
         _decay(world, history)
         _bleed(world, history)
         _people(world, history)

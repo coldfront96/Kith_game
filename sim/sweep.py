@@ -49,6 +49,9 @@ RANGES = {
     "native_telling": (0.010, 0.035),
     "native_fashion_damping": (0.0, 2.0),
     "telling_gain": (0.015, 0.060),
+    "maintainer_vigor": (0.0, 1.0),
+    "contest_swing": (0.01, 0.20),
+    "contest_saturation_damping": (0.0, 2.0),
 }
 
 
@@ -81,7 +84,34 @@ def evaluate(draw: dict[str, float], ticks: int) -> dict:
     out["middle"] = min(middles) if middles else None
     out["reactable"] = out["middle"] is not None and out["middle"] >= MIN_MIDDLE
 
-    out["viable"] = bool(out["stable"] and out["punishing"] and out["reactable"])
+    # Rivals have to stay in the fight. The player going 600-1 means the
+    # Messengers are scenery, and a player who cannot ever win means the
+    # strength-from-belief loop gives them nothing.
+    world = load_world()
+    world.tuning.update(draw)
+    engine.run(world, scenarios.warlord, ticks)
+    fights = world.contests
+    rate = world.player_wins / fights if fights else 0.0
+    out["fights"] = fights
+    out["win_rate"] = rate
+    out["competitive"] = fights >= 20 and 0.35 <= rate <= 0.95
+
+    # Deliberate collecting must still beat doing nothing, or intervention
+    # has no payoff and the optimal play is to leave the world alone.
+    world = load_world()
+    world.tuning.update(draw)
+    engine.run(world, scenarios.absent, ticks)
+    lazy = len(world.bound)
+    world = load_world()
+    world.tuning.update(draw)
+    engine.run(world, scenarios.collector, ticks)
+    out["bind_gap"] = len(world.bound) - lazy
+    out["rewarding"] = out["bind_gap"] >= 2
+
+    out["viable"] = bool(
+        out["stable"] and out["punishing"] and out["reactable"]
+        and out["competitive"] and out["rewarding"]
+    )
     return out
 
 
@@ -119,6 +149,8 @@ def main() -> int:
         ("stable unattended", "stable"),
         ("punishes monoculture", "punishing"),
         (f"middle >= {MIN_MIDDLE} ticks", "reactable"),
+        ("rivals competitive", "competitive"),
+        ("collecting beats idling", "rewarding"),
     ):
         hits = sum(1 for _, r in results if r[key])
         print(f"  {label:<24} {hits:>4}/{n}  ({100 * hits / max(1, n):>3.0f}%)")

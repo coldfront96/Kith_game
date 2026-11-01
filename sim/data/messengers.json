@@ -1,0 +1,30 @@
+{
+  "schema_version": 2,
+  "comment": "Rival Messengers. Each is a Kith in human shape doing rounds, though nobody in the world knows that. Maintainers rebalance whichever region they are standing in by propping up its weakest story, then move on. They are the homeostasis given a face: if they do their job, the world holds together without an abstract native-telling term keeping it alive. The player is the rogue - the only Messenger who pushes instead of balancing.",
+  "messengers": [
+    {
+      "id": "wren",
+      "name": "Wren of the Nine Gates",
+      "home": "fenmouth",
+      "behavior": "maintainer",
+      "bound": ["drowned_bell", "thirteen_steps", "ash_mother"],
+      "travel_period": 9
+    },
+    {
+      "id": "corvel",
+      "name": "Corvel Ashgate",
+      "home": "stonereach",
+      "behavior": "maintainer",
+      "bound": ["standing_man", "emberwake", "counting_crow"],
+      "travel_period": 13
+    },
+    {
+      "id": "small_mercy",
+      "name": "Small Mercy",
+      "home": "greenhollow",
+      "behavior": "maintainer",
+      "bound": ["greenmother", "hollowmaw", "lantern_jack", "bride_in_the_weir"],
+      "travel_period": 7
+    }
+  ]
+}
